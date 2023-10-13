@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -10,4 +11,9 @@ import { CommonModule } from '@angular/common';
 })
 export class HomeComponent {
 
+  constructor(private router: Router) {}
+
+  go(role: string) {
+    this.router.navigateByUrl(role);
+  }
 }

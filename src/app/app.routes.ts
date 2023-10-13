@@ -1,11 +1,10 @@
 import { Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
 
 export const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
-    loadComponent: () =>
-      import('./home/home.component').then((c) => c.HomeComponent),
+    component: HomeComponent,
   },
   {
     path: ':role',
