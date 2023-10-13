@@ -1,0 +1,9 @@
+<div class="bg" [ngClass]="role"></div>
+
+<div class="text">{{ quote() }}</div>
+
+<nav>
+    <span (click)="prev()">&#10140;</span>
+    <span (click)="home()">&#9711;</span>
+    <span (click)="next()">&#10140;</span>
+</nav>
