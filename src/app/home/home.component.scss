@@ -1,6 +1,6 @@
 main {
   display: grid;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 50vh 50vh;
 
   section {
     display: grid;
@@ -8,6 +8,7 @@ main {
 
     img {
       width: 100%;
+      height: auto;
     }
 
     label {
