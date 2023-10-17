@@ -33,7 +33,7 @@ nav {
   min-height: 65%;
   padding: 20px;
   text-align: center;
-  font-size: 26px;
+  font-size: 24px;
   white-space: pre-wrap;
 }
 
@@ -43,6 +43,7 @@ nav {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  transition: background-image 1s ease-in-out;
 
   &.husbands {
     background-image: url(../../assets/husbands.webp);
