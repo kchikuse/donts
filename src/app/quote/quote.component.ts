@@ -1,23 +1,30 @@
-import { Component, HostListener, Input, computed, signal } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  Input,
+  computed,
+  signal,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Role } from '../app.config';
 
 @Component({
   selector: 'app-quote',
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule],
   templateUrl: './quote.component.html',
   styleUrls: ['./quote.component.scss'],
+  animations: [],
 })
 export class QuoteComponent {
-  @Input() role?: string;
+  @Input() role: Role = 'husbands';
 
   quote = computed(() => this.quotes()[this.index()]);
 
   private quotes = signal<string[]>([]);
   private index = signal(0);
-  private KEY = 'index';
 
   private get max(): number {
     return this.quotes().length - 1;
@@ -27,7 +34,7 @@ export class QuoteComponent {
 
   @HostListener('window:beforeunload')
   savePosition() {
-    localStorage.setItem(this.KEY, String(this.index()));
+    localStorage.setItem(this.role, String(this.index()));
   }
 
   ngOnInit() {
@@ -40,37 +47,34 @@ export class QuoteComponent {
   prev() {
     let index = this.index();
 
-    if(index > 0) {
-      index --;
-    }
-    else {
+    if (index > 0) {
+      index--;
+    } else {
       index = this.max;
     }
-    
+
     this.index.set(index);
   }
 
   next() {
     let index = this.index();
 
-    if(index < this.max) {
-      index ++;
-    }
-    else {
+    if (index < this.max) {
+      index++;
+    } else {
       index = 0;
     }
-    
+
     this.index.set(index);
   }
 
   home() {
-    this.index.set(0);
     this.savePosition();
     this.router.navigateByUrl('/');
   }
 
   private loadIndex() {
-    const index = localStorage.getItem(this.KEY) ?? 0;
+    const index = localStorage.getItem(this.role) ?? 0;
     this.index.set(Number(index));
   }
 }
