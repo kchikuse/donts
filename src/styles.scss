@@ -1,7 +1,13 @@
+@font-face {
+  font-family: "Roboto";
+  src: url(./assets/Roboto-Regular.ttf) format("truetype");
+  font-weight: 400;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-size: 16px;
-  font-family: system-ui;
+  font-family: "Roboto", sans-serif;
 }

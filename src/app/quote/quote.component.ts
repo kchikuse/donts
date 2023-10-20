@@ -38,9 +38,10 @@ export class QuoteComponent {
   }
 
   ngOnInit() {
-    this.loadIndex();
+    const index = localStorage.getItem(this.role) ?? 0;
     this.http.get<string[]>(`assets/${this.role}.json`).subscribe((quotes) => {
       this.quotes.set(quotes);
+      this.index.set(+index);
     });
   }
 
@@ -71,10 +72,5 @@ export class QuoteComponent {
   home() {
     this.savePosition();
     this.router.navigateByUrl('/');
-  }
-
-  private loadIndex() {
-    const index = localStorage.getItem(this.role) ?? 0;
-    this.index.set(Number(index));
   }
 }
