@@ -11,11 +11,11 @@ export const routes: Routes = [
     path: ':role',
     loadComponent: () =>
       import('./quote/quote.component').then((c) => c.QuoteComponent),
-      canActivate: [navGuard()]
+    canActivate: [navGuard()],
   },
   {
     path: '**',
-    redirectTo: '', 
-    pathMatch: 'full'
+    redirectTo: '',
+    pathMatch: 'full',
   },
 ];

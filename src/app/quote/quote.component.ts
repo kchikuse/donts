@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Role } from '../app.config';
+import { NotifyService } from '../services/notify.service';
 
 @Component({
   selector: 'app-quote',
@@ -25,12 +26,15 @@ export class QuoteComponent {
 
   private quotes = signal<string[]>([]);
   private index = signal(0);
-
   private get max(): number {
     return this.quotes().length - 1;
   }
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private notify: NotifyService
+  ) {}
 
   @HostListener('window:beforeunload')
   savePosition() {
@@ -55,6 +59,7 @@ export class QuoteComponent {
     }
 
     this.index.set(index);
+    this.notify.pop();
   }
 
   next() {
@@ -67,10 +72,12 @@ export class QuoteComponent {
     }
 
     this.index.set(index);
+    this.notify.pop();
   }
 
   home() {
     this.savePosition();
+    this.notify.click();
     this.router.navigateByUrl('/');
   }
 }
