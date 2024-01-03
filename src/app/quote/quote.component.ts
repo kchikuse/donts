@@ -59,7 +59,6 @@ export class QuoteComponent {
     }
 
     this.index.set(index);
-    this.notify.pop();
   }
 
   next() {
@@ -72,7 +71,6 @@ export class QuoteComponent {
     }
 
     this.index.set(index);
-    this.notify.pop();
   }
 
   home() {
