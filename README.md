@@ -1,8 +1,6 @@
-# Donts for Wives & Husbands
+# Donts for Wives
 
 Old timey advice for married people
 
-*This project was generated with Angular CLI version 16.2.6.*
-
-> Don'ts for Wives & Don'ts For Husbands 
+> Don'ts for Wives
 > -- <cite>Blanche Ebbutt</cite>
