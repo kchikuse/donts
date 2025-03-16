@@ -24,7 +24,7 @@ jobs:
         run: |
           rm -rf dist
           mkdir -p dist
-          cp *.webp *.ttf dist/
+          cp sw.js manifest.json *.webp *.ttf dist/
 
       - name: Minify inline HTML, JS, and CSS
         run: |
