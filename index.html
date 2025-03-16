@@ -465,25 +465,27 @@
         quoteModal.style.display = "flex";
       }
 
-      function showQuoteNotification() {
+      function showQuoteNotification(isScheduled = false) {
         currentQuoteIndex = getRandomQuoteIndex();
         const quote = quotes[currentQuoteIndex];
         audio.play().catch((e) => console.error(e));
 
-        // if (document.hidden) {
+        if (!document.hidden) {
+          showQuoteModal(currentQuoteIndex);
+        }
+
+        if (document.hidden || isScheduled) {
           const title = "Daily Quote";
           const options = {
             body: quote,
             icon: "heart.webp",
             requireInteraction: true,
+            data: { quoteIndex: currentQuoteIndex }
           };
 
           if ("serviceWorker" in navigator) {
             navigator.serviceWorker.ready.then((registration) => {
-              registration.showNotification(title, {
-                ...options,
-                data: { quoteIndex: currentQuoteIndex },
-              });
+              registration.showNotification(title, options);
             });
           } else {
             const notification = new Notification(title, options);
@@ -493,9 +495,7 @@
               this.close();
             };
           }
-        // } else {
-        //   showQuoteModal(currentQuoteIndex);
-        // }
+        }
       }
 
       function scheduleNotification() {
@@ -637,7 +637,7 @@
             alarmId = setTimeout(() => {
               checkNotificationPermission().then((permission) => {
                 if (permission) {
-                  showQuoteNotification();
+                  showQuoteNotification(true);
                   scheduleNotification();
                 }
               });
