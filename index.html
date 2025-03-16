@@ -470,7 +470,7 @@
         const quote = quotes[currentQuoteIndex];
         audio.play().catch((e) => console.error(e));
 
-        if (document.hidden) {
+        // if (document.hidden) {
           const title = "Daily Quote";
           const options = {
             body: quote,
@@ -493,9 +493,9 @@
               this.close();
             };
           }
-        } else {
-          showQuoteModal(currentQuoteIndex);
-        }
+        // } else {
+        //   showQuoteModal(currentQuoteIndex);
+        // }
       }
 
       function scheduleNotification() {
