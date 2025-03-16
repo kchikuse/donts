@@ -155,9 +155,9 @@
         </select>
       </div>
 
-      <button id="start-btn">Enable messages</button>
       <button id="test-btn">Show quote</button>
-      <button id="stop-btn" class="stop">Cancel</button>
+      <button id="start-btn">Subscribe</button>
+      <button id="stop-btn" class="stop">Unsubscribe</button>
 
       <div id="status" class="status"></div>
     </div>
@@ -400,6 +400,8 @@
       let usedQuoteIndices = [];
       let currentQuoteIndex = -1;
 
+      stopBtn.style.display = "none";
+
       async function checkNotificationPermission() {
         if (!("Notification" in window)) {
           showStatus("This browser does not support notifications", "error");
@@ -429,7 +431,7 @@
 
         setTimeout(() => {
           statusDiv.style.display = "none";
-        }, 6000);
+        }, 3000);
       }
 
       function getRandomQuoteIndex() {
@@ -480,7 +482,7 @@
             body: quote,
             icon: "heart.webp",
             requireInteraction: true,
-            data: { quoteIndex: currentQuoteIndex }
+            data: { quoteIndex: currentQuoteIndex },
           };
 
           if ("serviceWorker" in navigator) {
@@ -564,6 +566,8 @@
           scheduleNotification();
 
           showStatus("Daily Wisdom has been enabled", "success");
+          startBtn.style.display = "none";
+          stopBtn.style.display = "block";
         } else {
           showStatus(
             "Notification permission denied. Please enable notifications.",
@@ -578,6 +582,8 @@
           alarmId = null;
           localStorage.removeItem("scheduledTime");
           showStatus("Notifications have been stopped", "info");
+          startBtn.style.display = "block";
+          stopBtn.style.display = "none";
         }
       }
 
@@ -656,6 +662,9 @@
               )}`,
               "info"
             );
+
+            startBtn.style.display = "none";
+            stopBtn.style.display = "block";
           }
         }
 
