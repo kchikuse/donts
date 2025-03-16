@@ -20,9 +20,14 @@ jobs:
       - name: Install dependencies
         run: npm install html-minifier terser clean-css-cli -g
 
+      - name: Prepare dist folder
+        run: |
+          rm -rf dist
+          mkdir -p dist
+          cp *.webp *.ttf dist/
+
       - name: Minify inline HTML, JS, and CSS
         run: |
-          # Minify HTML including inline CSS and JS
           html-minifier \
             --collapse-whitespace \
             --remove-comments \
@@ -35,6 +40,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: dist
+          publish_dir: dist  # Deploy only the minified files
           enable_jekyll: false
-          
